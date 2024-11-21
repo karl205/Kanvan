@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@layer components {
+  .button {
+    @apply bg-[#635fc7] py-2 px-4 rounded-full text-white text-lg font-semibold hover:opacity-80 duration-200
+  }
+}
+
+.dropdown{
+  background-color: #00000080;
+}
+
+.filter-white {
+  filter: invert(100%) sepia(96%) saturate(16%) hue-rotate(350deg)
+    brightness(104%) contrast(100%);
+}
+
+.select-status{
+  background-image: url("./assets/icon-chevron-down.svg");
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 16px top 50%;
+}
+
+/* Estilos para el formulario */
+.new-login-container {
+  @apply max-w-md mx-auto p-8 border border-gray-300 rounded-lg shadow-lg bg-white transition-all duration-300;
+
+}
+
+h2 {
+  @apply text-center text-2xl font-semibold text-gray-800 mb-6;
+  
+}
+
+form {
+  @apply flex flex-col;
+  
+}
+
+div {
+
+}
+
+label {
+  @apply mb-2 font-bold text-gray-700;
+}
+
+input {
+  @apply p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200;
+}
+
+button {
+  @apply py-2 bg-green-600 text-white rounded-md cursor-pointer transition duration-200;
+}
+
+button:hover {
+  @apply bg-green-700 shadow-lg;
+}
+button:focus {
+  @apply ring-2 ring-blue-500;
+}
+
