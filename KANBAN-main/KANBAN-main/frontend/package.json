@@ -5,6 +5,7 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
     "@headlessui/react": "^1.7.13",
+    "@madzadev/audio-player": "^2.1.14",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
