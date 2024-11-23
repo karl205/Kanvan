@@ -1,0 +1,134 @@
+.notification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+  
+  .notification-container {
+    background: white;
+    padding: 20px 20px 40px 20px;
+    border-radius: 8px;
+    width: 800px;
+    height: 160px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    background: #635fc7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background: #534eb8;
+  }
+  .notification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+  
+  .notification-container {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Botón cerrar */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .close-button:hover {
+    color: #635fc7;
+  }
+  .notification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+  
+  .notification-container {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: 5px solid;
+    animation: borderColorChange 2s infinite; /* Aplicar animación al borde */
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .close-button:hover {
+    color: #635fc7;
+  }
+  
+  /* Animación para cambiar el color del borde */
+  @keyframes borderColorChange {
+    0% {
+      border-color: red;
+    }
+    25% {
+      border-color: white;
+    }
+    50% {
+        border-color: red;
+    }
+    75% {
+        border-color: white;
+    }
+    100% {
+        border-color: red;
+    }
+  }
+  
+  

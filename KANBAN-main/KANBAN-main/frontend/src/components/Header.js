@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Clock, Sun, User } from 'lucide-react';
 import { useAuth0 } from "@auth0/auth0-react";
 import AlarmModal from './AlarmModal';
+import NotificationModal from "./NotificationModal";
 
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
@@ -26,8 +27,25 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
+  const [alarms, setAlarms] = useState([]);
+  const [notification, setNotification] = useState(null);
 
+  const handleSaveAlarm = (alarm, index) => {
+    if (index !== null) {
+      // Editar alarma existente
+      setAlarms((prev) =>
+        prev.map((a, i) => (i === index ? alarm : a))
+      );
+    } else {
+      // Agregar nueva alarma
+      setAlarms((prev) => [...prev, alarm]);
+    }
+  };
 
+  // Función para eliminar una alarma
+  const handleDeleteAlarm = (index) => {
+    setAlarms((prev) => prev.filter((_, i) => i !== index));
+  };
   const onDeleteBtnClick = () => {
     if (board) {
       dispatch(boardsSlice.actions.deleteBoard(board.id));
@@ -35,17 +53,29 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     }
   };
 
+  useEffect(() => {
+    const checkAlarms = () => {
+      const currentTime = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      const triggeredAlarm = alarms.find((alarm) => alarm.time === currentTime);
+      if (triggeredAlarm) {
+        setNotification(triggeredAlarm); // Activar la notificación
+        setAlarms((prev) => prev.filter((alarm) => alarm.time !== triggeredAlarm.time)); // Opcional: eliminar alarma cumplida
+      }
+    };
 
+    const interval = setInterval(checkAlarms, 1000); // Verificar cada segundo
+    return () => clearInterval(interval); // Limpiar intervalo
+  }, [alarms]);
 
    
 
   // Widget Component - Ahora más compacto
   const Widget = ({ icon, title, value }) => (
-    <div style={{ display:'flex', flexDirection:'row', marginLeft:'10px', width:'auto', height:'auto', marginRight:'5px', marginTop:'5px' }}>
-      <div className="text-[#635fc7]" style={{marginLeft:'10px'}}>
-        {icon}
-      </div>
-      <div className="text-white text-xs font-medium" style={{}}>{value}</div>
+    <div style={{ display:'flex', flexDirection:'row', marginLeft:'10px', width:'auto', height:'auto', marginRight:'5px', marginTop:'5px'}}>
+        <div className="text-[#635fc7]" style={{marginLeft:'10px'}}>
+          {icon}
+        </div>
+      <div className="text-white  font-medium" style={{fontSize: '17px'}}>{value}</div>
     </div>
   );
 
@@ -61,7 +91,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     return (
       <div onClick={() => setIsAlarmModalOpen(true)} style={{ cursor: "pointer" }}>
       <Widget
-        icon={<Clock size={14} />}
+        icon={<Clock size={18} />}
         value={time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
       />
       </div>
@@ -71,7 +101,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   // Weather Widget - Simplificado
   const WeatherWidget = () => (
     <Widget
-      icon={<Sun size={16} />}
+      icon={<Sun size={18} />}
       value="23°C"
     />
   );
@@ -79,8 +109,8 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   // User Widget - Simplificado
   const UserWidget = () => (
     <Widget
-      icon={<User size={16} />}
-      value="Bienvenido"
+      icon={<User size={18} />}
+      value="Cronometros"
     />
   );
 
@@ -163,11 +193,19 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
           />
         )}
         {/* Aquí se renderiza el AlarmModal */}
+        <NotificationModal
+        notification={notification}
+        onClose={() => setNotification(null)} // Cerrar la notificación
+      />
       {isAlarmModalOpen && (
         <AlarmModal
-          isOpen={isAlarmModalOpen}
-          setIsOpen={setIsAlarmModalOpen}
+        isOpen={isAlarmModalOpen}
+        setIsOpen={setIsAlarmModalOpen}
+        alarms={alarms}
+        onSave={handleSaveAlarm}
+        onDelete={handleDeleteAlarm}
         />
+        
       )}
       </header>
     </div>
