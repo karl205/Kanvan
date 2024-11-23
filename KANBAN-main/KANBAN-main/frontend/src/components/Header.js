@@ -12,6 +12,8 @@ import boardsSlice from "../redux/boardsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Clock, Sun, User } from 'lucide-react';
 import { useAuth0 } from "@auth0/auth0-react";
+import AlarmModal from './AlarmModal';
+
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
   const dispatch = useDispatch();
@@ -23,6 +25,8 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [boardType, setBoardType] = useState("add");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
+
 
   const onDeleteBtnClick = () => {
     if (board) {
@@ -55,10 +59,12 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     }, []);
 
     return (
+      <div onClick={() => setIsAlarmModalOpen(true)} style={{ cursor: "pointer" }}>
       <Widget
         icon={<Clock size={14} />}
         value={time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
       />
+      </div>
     );
   };
 
@@ -156,6 +162,13 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
             onDeleteBtnClick={onDeleteBtnClick}
           />
         )}
+        {/* Aquí se renderiza el AlarmModal */}
+      {isAlarmModalOpen && (
+        <AlarmModal
+          isOpen={isAlarmModalOpen}
+          setIsOpen={setIsAlarmModalOpen}
+        />
+      )}
       </header>
     </div>
   );

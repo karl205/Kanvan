@@ -11,10 +11,16 @@ import Products from './components/Products';
 import SignUp from './components/SignUp';
 import Navbar from './components/Navbar';
 import Home1 from './components/Home1';
+import AlarmModal from './components/AlarmModal';
+
+
 import './App.css';
 
 function App() {
   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
+  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
+
+  
 
   // Hooks de Auth0
   const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
@@ -58,14 +64,8 @@ function App() {
           </div>
         ) : (
           <div>
-           {/*  <div>
-              <label className="flex justify-end" style={{ backgroundColor: 'black', position: 'fixed', color: 'white', width: '100%',  zIndex: 1000, padding: '15px' }}>
-                Hola , {user?.name} 
-                <button onClick={handleLogout}>Cerrar sesion</button>
-              </label>
-              
-            </div> */}
-            
+           
+          
             <Header setIsBoardModalOpen={setIsBoardModalOpen} isBoardModalOpen={isBoardModalOpen} user={user} handleLogout={handleLogout} />
             <div className="overflow-hidden overflow-x-scroll" style={{backgroundColor:'blue'}}>
               {boards.length > 0 ? (
@@ -74,10 +74,11 @@ function App() {
                 <EmptyBoard type="add" />
               )}
             </div>
-            {/* Mostrar nombre de usuario y botón de logout */}
+            
             
             
           </div>
+          
         )}
       </div>
     </Router>
