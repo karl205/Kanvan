@@ -11,7 +11,10 @@ import Products from './components/Products';
 import SignUp from './components/SignUp';
 import Navbar from './components/Navbar';
 import Home1 from './components/Home1';
-import AlarmModal from './components/AlarmModal';
+import AlarmModal from './components/Alarma/AlarmModal';
+import YouTubeComponent from './components/YoutubeComponent';
+import ReproductorComponent from './components/ReproductorComponent';
+
 
 
 import './App.css';
@@ -19,6 +22,7 @@ import './App.css';
 function App() {
   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
+  const [activeComponent, setActiveComponent] = useState('youtube');
 
   
 
@@ -75,9 +79,18 @@ function App() {
               )}
             </div>
             
-            
-            
+                <div >
+                <div className="divContenedor">
+          <button className="button youtube" onClick={() => setActiveComponent('youtube')}>YouTube</button>
+          <button className="button reproductor" onClick={() => setActiveComponent('reproductor')}>Reproductor</button>
           </div>
+          <div className={`fade-in`}>
+            {activeComponent === 'youtube' && <YouTubeComponent />}
+            {activeComponent === 'reproductor' && <ReproductorComponent />}
+          </div>
+        </div>
+                
+              </div>
           
         )}
       </div>

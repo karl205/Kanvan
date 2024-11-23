@@ -12,8 +12,8 @@ import boardsSlice from "../redux/boardsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Clock, Sun, User } from 'lucide-react';
 import { useAuth0 } from "@auth0/auth0-react";
-import AlarmModal from './AlarmModal';
-import NotificationModal from "./NotificationModal";
+import AlarmModal from './Alarma/AlarmModal';
+import NotificationModal from "./Alarma/NotificationModal";
 
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
