@@ -68,7 +68,7 @@ function Navbar() {
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
-                aasfasdfdsf
+                
               </Link>
             </li>
           </ul>

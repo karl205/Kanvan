@@ -30,6 +30,23 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [alarms, setAlarms] = useState([]);
   const [notification, setNotification] = useState(null);
 
+  const onDropdownClick = () => {
+    setOpenDropdown((state) => !state);
+    setIsElipsisMenuOpen(false);
+    setBoardType("add");
+  };
+
+  const setOpenEditModal = () => {
+    setIsBoardModalOpen(true);
+    setIsElipsisMenuOpen(false);
+  };
+  const setOpenDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+    setIsElipsisMenuOpen(false);
+  };
+
+ 
+
   const handleSaveAlarm = (alarm, index) => {
     if (index !== null) {
       // Editar alarma existente
@@ -46,9 +63,12 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const handleDeleteAlarm = (index) => {
     setAlarms((prev) => prev.filter((_, i) => i !== index));
   };
-  const onDeleteBtnClick = () => {
-    if (board) {
-      dispatch(boardsSlice.actions.deleteBoard(board.id));
+  const onDeleteBtnClick = (e) => {
+    if (e.target.textContent === "Delete") {
+      dispatch(boardsSlice.actions.deleteBoard());
+      dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
+      setIsDeleteModalOpen(false);
+    } else {
       setIsDeleteModalOpen(false);
     }
   };
@@ -156,18 +176,27 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
           <button
             className="hidden md:block bg-[#635fc7] hover:bg-[#535199] text-white px-4 py-2  text-sm font-medium transition-colors"
             style={{marginRight:'50px', marginTop:'10px', borderRadius:'5px'}}
-            onClick={() => setIsTaskModalOpen(true)}
+            onClick={() => {
+              setIsTaskModalOpen((prevState) => !prevState);
+            }}
           >
             + Añadir nueva tarea
           </button>
           <button
-            onClick={() => setIsTaskModalOpen(true)}
-            className="md:hidden bg-[#635fc7] hover:bg-[#535199] text-white w-8 h-8 rounded-full flex items-center justify-center"
+            onClick={() => {
+              setIsTaskModalOpen((prevState) => !prevState);
+            }}
+            className=" button py-1 px-3 md:hidden "
           >
             +
           </button>
         </div>
-
+        {openDropdown && (
+          <HeaderDropDown
+            setOpenDropdown={setOpenDropdown}
+            setIsBoardModalOpen={setIsBoardModalOpen}
+          />
+        )}
         {isTaskModalOpen && (
           <AddEditTaskModal
             setIsAddTaskModalOpen={setIsTaskModalOpen}

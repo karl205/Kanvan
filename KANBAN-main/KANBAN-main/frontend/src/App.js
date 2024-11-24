@@ -11,9 +11,11 @@ import Products from './components/Products';
 import SignUp from './components/SignUp';
 import Navbar from './components/Navbar';
 import Home1 from './components/Home1';
-import AlarmModal from './components/Alarma/AlarmModal';
+
 import YouTubeComponent from './components/YoutubeComponent';
 import ReproductorComponent from './components/ReproductorComponent';
+import WeatherWidget from './components/WeatherWidget';
+import ChatGPT from './components/ChatGPT';
 
 
 
@@ -89,8 +91,11 @@ function App() {
             {activeComponent === 'reproductor' && <ReproductorComponent />}
           </div>
         </div>
-                
+        
+              
+              
               </div>
+              
           
         )}
       </div>
