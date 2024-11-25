@@ -3,6 +3,10 @@ import './Cards.css';
 import CardItem from './CardItem';
 import chat from './images/ChatGPT.jpg';
 import calendar from './images/calendario.jpg';
+import Home from './images/Home.jpg';
+import Reproductor from './images/reproductor.jpg';
+import Rueda from './images/reuda.jpg';
+import planificar from './images/planificar.jpg';
 
 
 function Cards() {
@@ -13,13 +17,13 @@ function Cards() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='/src/images/img-9.jpg'
-              text='Crear tareas diarias y asignarlas a columnas en un tablero Kanban'
+              src={Home}
+              text='Crea tareas diarias y asignarlas a columnas en un tablero Kanban'
               label='Principal'
               //path='/services'
             />
             <CardItem
-              src='/src/images/img-2.jpg'
+              src={Reproductor}
               text='Interactua con youtube y reproductor de musica'
               label='Herramienta'
              // path='/services'
@@ -27,20 +31,20 @@ function Cards() {
           </ul>
           <ul className='cards__items'>
             <CardItem
-              src='/src/'
-              text='Añadir y consultar un calendario personal'
+              src={Rueda}
+              text='Configura alarmar,cronometros, Tareas , etc...'
               label='Herramienta'
              // path='/services'
             />
             <CardItem
               src={calendar}
-              text='Añadir y consultar un calendario personal'
+              text='Añade y consultar un calendario personal'
               label='Herramienta'
               //path='/products'
             />
             <CardItem
-              src='/images/img-8.jpg'
-              text='Planificar el día con hora, actividad, prioridad y fecha de cumplimiento'
+              src={planificar}
+              text='Planifica el día con hora, actividad, prioridad y fecha de cumplimiento'
               label='Herramienta'
               //path='/sign-up'
             />

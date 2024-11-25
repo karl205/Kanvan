@@ -14,8 +14,7 @@ import Home1 from './components/Home1';
 
 import YouTubeComponent from './components/YoutubeComponent';
 import ReproductorComponent from './components/ReproductorComponent';
-import WeatherWidget from './components/WeatherWidget';
-import ChatGPT from './components/ChatGPT';
+
 
 
 

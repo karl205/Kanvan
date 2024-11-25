@@ -1,0 +1,11 @@
+[33mbd49942[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Widgets Clima y Cronometro Funcionales Correctamente
+[33mf078f49[m Programa fusionado con cambios actuales
+[33m977ee90[m Widgets Cronometro y Clima Agregados, Corregidos y Funcionando
+[33m2fd48ff[m Creacion de tareas en el home ya funcuionan, ademas se agregan mejoras en landing
+[33m24929b6[m Se agrego reproductor de musica con tracks de reproduccion, demas informacion se mantiene
+[33m88316fe[m Se agrego metodo para alternar componente, entre youtube y reproductor, se intalo react-youtube, pero falta toda configuracion del reproductor
+[33m941aca6[m Mejoras terminadas en reloj
+[33mfc24db2[m primer version de reloj
+[33m3ede1d0[m Primer version de reloj
+[33mb61dcdf[m Create README.md
+[33m31a2c65[m Landing Page(sin imagenes(), tablas en home(falta configurar para nuevas tareas) y autenticacion con out0
