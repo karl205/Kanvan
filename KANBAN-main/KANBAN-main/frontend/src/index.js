@@ -5,11 +5,13 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { Auth0Provider } from '@auth0/auth0-react';
+import "@madzadev/audio-player/dist/index.css";
 
 // Obtener las variables de entorno de Auth0
 const domain = "dev-x5fnre53nw3j4xy8.us.auth0.com";
 const clientID = "VXd1Y1k3ofHg1bxd7qEs4HvS6UjrA4gC";
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 
 root.render(
   <React.StrictMode>

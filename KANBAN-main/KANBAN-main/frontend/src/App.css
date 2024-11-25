@@ -134,3 +134,16 @@
   width: 100%;             /* Asegura que ocupe todo el ancho */
 }
 
+.react-calendar {
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+}
+
+.react-calendar__tile--active {
+  background: #2d89ef;
+  color: white;
+}
