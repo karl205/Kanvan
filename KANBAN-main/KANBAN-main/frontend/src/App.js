@@ -15,6 +15,8 @@ import Home1 from './components/Home1';
 import YouTubeComponent from './components/YoutubeComponent';
 import ReproductorComponent from './components/ReproductorComponent';
 import SideMenu from "./components/SideMenu";
+import TimeLeft from './components/TimeLeft';
+
 
 
 
@@ -95,6 +97,9 @@ function App() {
         
               
         <SideMenu/>
+        
+        
+
               </div>
               
           
