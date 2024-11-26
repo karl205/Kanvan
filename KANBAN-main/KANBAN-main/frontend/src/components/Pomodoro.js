@@ -48,6 +48,8 @@ const Pomodoro = () => {
       <button onClick={stopTimer}>Detener</button>
       <button onClick={resetTimer}>Reiniciar</button>
     </div>
+
+    
   );
 };
 
