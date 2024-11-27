@@ -19,9 +19,6 @@ import TimeLeft from './components/TimeLeft';
 
 
 
-
-
-
 import './App.css';
 
 function App() {
