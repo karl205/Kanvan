@@ -20,6 +20,8 @@ function HeaderDropDown({ setOpenDropdown, setIsBoardModalOpen }) {
     setDarkSide(checked);
   };
 
+
+  
   const boards = useSelector((state) => state.boards);
 
   return (
