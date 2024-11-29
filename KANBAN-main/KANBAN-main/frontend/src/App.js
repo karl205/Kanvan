@@ -22,12 +22,14 @@ import TimeLeft from './components/TimeLeft';
 
 
 
+
 import './App.css';
 
 function App() {
   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
   const [activeComponent, setActiveComponent] = useState('youtube');
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   
 
@@ -97,7 +99,7 @@ function App() {
         
               
         <SideMenu/>
-        
+       
         
 
               </div>
