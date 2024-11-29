@@ -16,6 +16,7 @@ import YouTubeComponent from './components/YoutubeComponent';
 import ReproductorComponent from './components/ReproductorComponent';
 import SideMenu from "./components/SideMenu";
 import TimeLeft from './components/TimeLeft';
+import DailyPlanner from './components/DailyPlanner';
 
 
 
@@ -99,6 +100,7 @@ function App() {
         
               
         <SideMenu/>
+        
        
         
 

@@ -6,8 +6,9 @@ import AddEditBoardModal from "../modals/AddEditBoardModal";
 import DeleteModal from "../modals/DeleteModal";
 import AlarmModal from "./Alarma/AlarmModal"; // Incluido desde archivo compartido
 import NotificationModal from "./Alarma/NotificationModal"; // Incluido desde archivo compartido
-import { Clock, Sun, User } from "lucide-react";
+import { Clock, Sun, User, AlarmCheck } from "lucide-react";
 import TimeLeft from "./TimeLeft"; // Importar TimeLeft
+import DailyPlanner from "./DailyPlanner";
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -19,6 +20,9 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [isUserModalOpen, setIsUserModalOpen] = useState(false); // Estado para UserWidget
   const [alarms, setAlarms] = useState([]);
   const [notification, setNotification] = useState(null);
+  const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
+
+  
 
   const onDropdownClick = () => {
     setOpenDropdown((state) => !state);
@@ -105,8 +109,36 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   // User Widget
   const UserWidget = () => (
     <Widget
-      icon={<User size={18} />}
+      icon={<AlarmCheck size={18} />}
       value="Cronómetros"
+      onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+    />
+  );
+  const Pomodoro = () => (
+    <Widget
+      icon={<User size={18} />}
+      value="Pomodoro"
+      onClick={() => setIsWeatherModalOpen(true)} // Abre el modal para UserWidget
+    />
+  );
+  const Otro = () => (
+    <Widget
+      icon={<User size={18} />}
+      value="Otro"
+      onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+    />
+  );
+  const Otro1 = () => (
+    <Widget
+      icon={<User size={18} />}
+      value="Otro1"
+      onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+    />
+  );
+  const Otro2 = () => (
+    <Widget
+      icon={<User size={18} />}
+      value="Otro2"
       onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
     />
   );
@@ -147,6 +179,10 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
         <ClockWidget />
         <WeatherWidget />
         <UserWidget />
+        <Pomodoro />
+        <Otro />
+        <Otro1 />
+        <Otro2 />
       </div>
 
       {/* Main Header */}
@@ -236,6 +272,48 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
       )}
 
       <NotificationModal notification={notification} onClose={() => setNotification(null)} />
+      {isWeatherModalOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        maxWidth: "500px",
+        width: "80%",
+      }}
+    >
+      <button
+        onClick={() => setIsWeatherModalOpen(false)}
+        style={{
+          background: "red",
+          color: "white",
+          border: "none",
+          padding: "10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          float: "right",
+        }}
+      >
+        X
+      </button>
+      <DailyPlanner /> {/* Renderiza DailyPlanner dentro del modal */}
+    </div>
+  </div>
+)}
     </div>
   );
 };
