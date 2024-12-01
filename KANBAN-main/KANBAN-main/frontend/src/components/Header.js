@@ -227,7 +227,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     return (
       <div>
         {/* Si el permiso fue denegado, no se muestra nada */}
-        {permissionDenied && <p>Permiso de geolocalización denegado. No se puede obtener la información del clima.</p>}
+        {permissionDenied && <p></p>}
   
         {/* Widget con la información meteorológica */}
         <Widget
