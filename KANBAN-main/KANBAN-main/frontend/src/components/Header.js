@@ -9,6 +9,7 @@ import NotificationModal from "./Alarma/NotificationModal"; // Incluido desde ar
 import { Clock, Sun, User, AlarmCheck } from "lucide-react";
 import TimeLeft from "./TimeLeft"; // Importar TimeLeft
 import DailyPlanner from "./DailyPlanner";
+import Pomodoro from "./Pomodoro"; 
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -21,6 +22,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [alarms, setAlarms] = useState([]);
   const [notification, setNotification] = useState(null);
   const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
+  const [isPomodoroOpen, setIsPomodoroOpen] = useState(false);
 
   
 
@@ -145,7 +147,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
       onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
     />
   );
-  const Pomodoro = () => (
+  const Planificacion = () => (
     <Widget
       icon={<User size={18} />}
       value="Planificacion"
@@ -169,8 +171,8 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const Otro2 = () => (
     <Widget
       icon={<User size={18} />}
-      value="Otro2"
-      onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+      value="Pomodoro"
+      onClick={() => setIsPomodoroOpen(true)} // Abre el Pomodoro para UserWidget
     />
   );
 
@@ -210,7 +212,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
         <ClockWidget />
         <WeatherWidget />
         <UserWidget />
-        <Pomodoro />
+        <Planificacion />
         <Otro />
         <Otro1 />
         <Otro2 />
@@ -345,6 +347,50 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     </div>
   </div>
 )}
+
+{isPomodoroOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        maxWidth: "500px",
+        width: "80%",
+      }}
+    >
+      <button
+        onClick={() => setIsPomodoroOpen(false)}
+        style={{
+          background: "red",
+          color: "white",
+          border: "none",
+          padding: "10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          float: "right",
+        }}
+      >
+        X
+      </button>
+      <Pomodoro /> {/* Renderiza DailyPlanner dentro del modal */}
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
