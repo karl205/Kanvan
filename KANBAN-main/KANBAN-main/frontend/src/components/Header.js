@@ -59,29 +59,60 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     return () => clearInterval(interval);
   }, [alarms]);
 
-  // Widget Component
-  const Widget = ({ icon, title, value, onClick }) => (
-    <div
-      onClick={onClick}
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        marginLeft: "10px",
-        width: "auto",
-        height: "auto",
-        marginRight: "5px",
-        marginTop: "5px",
-        cursor: "pointer",
-      }}
-    >
-      <div className="text-[#635fc7]" style={{ marginLeft: "10px" }}>
-        {icon}
+  const Widget = ({ icon, title, value, onClick }) => {
+    return (
+      <div
+        onClick={onClick}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "10px",
+          margin: "10px",
+          width: "90px",
+          height: "70px",
+          background: "linear-gradient(135deg, #635fc7, #2c3e50)", // Fondo inicial con tu color
+          borderRadius: "15px", // Bordes suaves
+          boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)", // Sombra elegante
+          cursor: "pointer",
+          transition: "all 0.3s ease-in-out", // Transiciones suaves
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background =
+            "linear-gradient(135deg, #2c3e50, #4ca1af)"; // Cambio a un degradado moderno
+          e.currentTarget.style.transform = "scale(1.1)"; // Zoom suave
+          e.currentTarget.style.boxShadow = "0 10px 15px rgba(0, 0, 0, 0.3)"; // Sombra más pronunciada
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background =
+            "linear-gradient(135deg, #635fc7, #2c3e50)"; // Restaurar fondo con tu color
+          e.currentTarget.style.transform = "scale(1)"; // Restaurar tamaño
+          e.currentTarget.style.boxShadow = "0 8px 12px rgba(0, 0, 0, 0.2)"; // Restaurar sombra
+        }}
+      >
+        <div
+          style={{
+            fontSize: "20px",
+            marginBottom: "5px",
+            color: "#ffffff", // Icono blanco
+          }}
+        >
+          {icon}
+        </div>
+        <div
+          style={{
+            fontSize: "12px",
+            fontWeight: "bold",
+            color: "#ffffff", // Texto blanco
+            textAlign: "center",
+          }}
+        >
+          {value}
+        </div>
       </div>
-      <div className="text-white font-medium" style={{ fontSize: "17px" }}>
-        {value}
-      </div>
-    </div>
-  );
+    );
+  };
 
   // Clock Widget
   const ClockWidget = () => {
