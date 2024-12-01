@@ -10,6 +10,7 @@ import { Clock, Sun, User, AlarmCheck } from "lucide-react";
 import TimeLeft from "./TimeLeft"; // Importar TimeLeft
 import DailyPlanner from "./DailyPlanner";
 import Pomodoro from "./Pomodoro"; 
+import axios from 'axios';
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -72,8 +73,8 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
           justifyContent: "center",
           padding: "10px",
           margin: "10px",
-          width: "90px",
-          height: "70px",
+          width: "85px",
+          height: "85px",
           background: "linear-gradient(135deg, #635fc7, #2c3e50)", // Fondo inicial con tu color
           borderRadius: "15px", // Bordes suaves
           boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)", // Sombra elegante
@@ -104,7 +105,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
         </div>
         <div
           style={{
-            fontSize: "12px",
+            fontSize: "10px",
             fontWeight: "bold",
             color: "#ffffff", // Texto blanco
             textAlign: "center",
@@ -161,13 +162,82 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
       onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
     />
   );
-  const Otro1 = () => (
-    <Widget
-      icon={<User size={18} />}
-      value="Otro1111"
-      onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
-    />
-  );
+  const Otro1 = () => {
+    const [weatherData, setWeatherData] = useState(null);
+    const [permissionDenied, setPermissionDenied] = useState(false);
+  
+    // Reemplaza con tu clave API de OpenWeather
+    const apiKey = '166f9650145b9de96741f8b02fdc6863';
+  
+    useEffect(() => {
+      // Si la ubicación no se ha proporcionado, intentamos obtenerla automáticamente
+      if (!permissionDenied) {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              // Si se concede el permiso, obtenemos la latitud y longitud
+              const { latitude, longitude } = position.coords;
+              await fetchWeatherByCoordinates(latitude, longitude);
+            },
+            () => {
+              // Si se niega el permiso, simplemente no hacemos nada
+              setPermissionDenied(true);
+            }
+          );
+        } else {
+          // Si la geolocalización no está disponible, no hacemos nada
+          setPermissionDenied(true);
+        }
+      }
+  
+      // Configuración de actualización automática cada 30 minutos
+      const interval = setInterval(() => {
+        if (!permissionDenied) {
+          fetchWeatherByCoordinates();
+        }
+      }, 30 * 60 * 1000); // 30 minutos (en milisegundos)
+  
+      return () => clearInterval(interval); // Limpiar el intervalo cuando el componente se desmonte
+    }, [permissionDenied]);
+  
+    const fetchWeatherByCoordinates = async (latitude, longitude) => {
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=es`
+        );
+        setWeatherData(response.data);
+      } catch (error) {
+        console.error("Error fetching weather data by coordinates:", error);
+        setWeatherData(null); // Si ocurre un error, no mostramos datos
+      }
+    };
+  
+    // Muestra la información del clima si está disponible
+    const weatherInfo = weatherData ? (
+      <div>
+        <h3>{weatherData.name}</h3> {/* Muestra la ciudad */}
+        <p>{weatherData.weather[0].description}</p> {/* Muestra la descripción del clima (soleado, nuboso, etc.) */}
+        <p>T: {weatherData.main.temp} °C</p> {/* Muestra la temperatura */}
+        <p>H: {weatherData.main.humidity} %</p> {/* Muestra la humedad */}
+      </div>
+    ) : (
+      <p>Cargando...</p> // Indicador de carga si los datos no están disponibles
+    );
+  
+    return (
+      <div>
+        {/* Si el permiso fue denegado, no se muestra nada */}
+        {permissionDenied && <p>Permiso de geolocalización denegado. No se puede obtener la información del clima.</p>}
+  
+        {/* Widget con la información meteorológica */}
+        <Widget
+          icon={<Sun size={18} />}
+          value={weatherInfo} // Muestra la información del clima aquí
+          onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+        />
+      </div>
+    );
+  };
   const Otro2 = () => (
     <Widget
       icon={<User size={18} />}
