@@ -6,8 +6,10 @@ import AddEditBoardModal from "../modals/AddEditBoardModal";
 import DeleteModal from "../modals/DeleteModal";
 import AlarmModal from "./Alarma/AlarmModal"; // Incluido desde archivo compartido
 import NotificationModal from "./Alarma/NotificationModal"; // Incluido desde archivo compartido
-import { Clock, Sun, User } from "lucide-react";
+import { Clock, Sun, User, AlarmCheck } from "lucide-react";
 import TimeLeft from "./TimeLeft"; // Importar TimeLeft
+import DailyPlanner from "./DailyPlanner";
+import Pomodoro from "./Pomodoro"; 
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -19,6 +21,10 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [isUserModalOpen, setIsUserModalOpen] = useState(false); // Estado para UserWidget
   const [alarms, setAlarms] = useState([]);
   const [notification, setNotification] = useState(null);
+  const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
+  const [isPomodoroOpen, setIsPomodoroOpen] = useState(false);
+
+  
 
   const onDropdownClick = () => {
     setOpenDropdown((state) => !state);
@@ -55,29 +61,60 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     return () => clearInterval(interval);
   }, [alarms]);
 
-  // Widget Component
-  const Widget = ({ icon, title, value, onClick }) => (
-    <div
-      onClick={onClick}
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        marginLeft: "10px",
-        width: "auto",
-        height: "auto",
-        marginRight: "5px",
-        marginTop: "5px",
-        cursor: "pointer",
-      }}
-    >
-      <div className="text-[#635fc7]" style={{ marginLeft: "10px" }}>
-        {icon}
+  const Widget = ({ icon, title, value, onClick }) => {
+    return (
+      <div
+        onClick={onClick}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "10px",
+          margin: "10px",
+          width: "90px",
+          height: "70px",
+          background: "linear-gradient(135deg, #635fc7, #2c3e50)", // Fondo inicial con tu color
+          borderRadius: "15px", // Bordes suaves
+          boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)", // Sombra elegante
+          cursor: "pointer",
+          transition: "all 0.3s ease-in-out", // Transiciones suaves
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background =
+            "linear-gradient(135deg, #2c3e50, #4ca1af)"; // Cambio a un degradado moderno
+          e.currentTarget.style.transform = "scale(1.1)"; // Zoom suave
+          e.currentTarget.style.boxShadow = "0 10px 15px rgba(0, 0, 0, 0.3)"; // Sombra más pronunciada
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background =
+            "linear-gradient(135deg, #635fc7, #2c3e50)"; // Restaurar fondo con tu color
+          e.currentTarget.style.transform = "scale(1)"; // Restaurar tamaño
+          e.currentTarget.style.boxShadow = "0 8px 12px rgba(0, 0, 0, 0.2)"; // Restaurar sombra
+        }}
+      >
+        <div
+          style={{
+            fontSize: "20px",
+            marginBottom: "5px",
+            color: "#ffffff", // Icono blanco
+          }}
+        >
+          {icon}
+        </div>
+        <div
+          style={{
+            fontSize: "12px",
+            fontWeight: "bold",
+            color: "#ffffff", // Texto blanco
+            textAlign: "center",
+          }}
+        >
+          {value}
+        </div>
       </div>
-      <div className="text-white font-medium" style={{ fontSize: "17px" }}>
-        {value}
-      </div>
-    </div>
-  );
+    );
+  };
 
   // Clock Widget
   const ClockWidget = () => {
@@ -105,9 +142,37 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   // User Widget
   const UserWidget = () => (
     <Widget
-      icon={<User size={18} />}
-      value="Cronómetros"
+      icon={<AlarmCheck size={18} />}
+      value="Cronómetro"
       onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+    />
+  );
+  const Planificacion = () => (
+    <Widget
+      icon={<User size={18} />}
+      value="Planificacion"
+      onClick={() => setIsWeatherModalOpen(true)} // Abre el modal para UserWidget
+    />
+  );
+  const Otro = () => (
+    <Widget
+      icon={<User size={18} />}
+      value="Otro"
+      onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+    />
+  );
+  const Otro1 = () => (
+    <Widget
+      icon={<User size={18} />}
+      value="Otro1"
+      onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+    />
+  );
+  const Otro2 = () => (
+    <Widget
+      icon={<User size={18} />}
+      value="Pomodoro"
+      onClick={() => setIsPomodoroOpen(true)} // Abre el Pomodoro para UserWidget
     />
   );
 
@@ -147,6 +212,10 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
         <ClockWidget />
         <WeatherWidget />
         <UserWidget />
+        <Planificacion />
+        <Otro />
+        <Otro1 />
+        <Otro2 />
       </div>
 
       {/* Main Header */}
@@ -236,6 +305,92 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
       )}
 
       <NotificationModal notification={notification} onClose={() => setNotification(null)} />
+      {isWeatherModalOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        maxWidth: "500px",
+        width: "80%",
+      }}
+    >
+      <button
+        onClick={() => setIsWeatherModalOpen(false)}
+        style={{
+          background: "red",
+          color: "white",
+          border: "none",
+          padding: "10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          float: "right",
+        }}
+      >
+        X
+      </button>
+      <DailyPlanner /> {/* Renderiza DailyPlanner dentro del modal */}
+    </div>
+  </div>
+)}
+
+{isPomodoroOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        maxWidth: "500px",
+        width: "80%",
+      }}
+    >
+      <button
+        onClick={() => setIsPomodoroOpen(false)}
+        style={{
+          background: "red",
+          color: "white",
+          border: "none",
+          padding: "10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          float: "right",
+        }}
+      >
+        X
+      </button>
+      <Pomodoro /> {/* Renderiza DailyPlanner dentro del modal */}
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
