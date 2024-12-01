@@ -164,7 +164,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const Otro1 = () => (
     <Widget
       icon={<User size={18} />}
-      value="Otro1"
+      value="Otro1111"
       onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
     />
   );
