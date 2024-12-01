@@ -141,7 +141,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const UserWidget = () => (
     <Widget
       icon={<AlarmCheck size={18} />}
-      value="Cronómetros"
+      value="Cronómetro"
       onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
     />
   );
