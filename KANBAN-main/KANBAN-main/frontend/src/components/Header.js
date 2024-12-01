@@ -148,7 +148,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const Pomodoro = () => (
     <Widget
       icon={<User size={18} />}
-      value="Pomodoro"
+      value="Planificacion"
       onClick={() => setIsWeatherModalOpen(true)} // Abre el modal para UserWidget
     />
   );
