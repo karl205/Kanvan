@@ -10,6 +10,7 @@ import { Clock, Sun, User, AlarmCheck } from "lucide-react";
 import TimeLeft from "./TimeLeft"; // Importar TimeLeft
 import DailyPlanner from "./DailyPlanner";
 import Pomodoro from "./Pomodoro"; 
+import CountdownManager from "./CountdownManager";
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -23,6 +24,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [notification, setNotification] = useState(null);
   const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
   const [isPomodoroOpen, setIsPomodoroOpen] = useState(false);
+  const [isCountdownManagerOpen, setIsCountdownManagerOpen] = useState(false);
 
   
 
@@ -157,8 +159,8 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const Otro = () => (
     <Widget
       icon={<User size={18} />}
-      value="Otro"
-      onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+      value="Cuentaregresiva"
+      onClick={() => setIsCountdownManagerOpen(true)} // Abre el modal para UserWidget
     />
   );
   const Otro1 = () => (
@@ -391,6 +393,144 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   </div>
 )}
 
+
+
+      {isUserModalOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              background: "white",
+              padding: "20px",
+              borderRadius: "10px",
+              maxWidth: "500px",
+              width: "90%",
+            }}
+          >
+            <button
+              onClick={() => setIsUserModalOpen(false)}
+              style={{
+                background: "red",
+                color: "white",
+                border: "none",
+                padding: "10px",
+                borderRadius: "5px",
+                cursor: "pointer",
+                float: "right",
+              }}
+            >
+              X
+            </button>
+            <TimeLeft /> {/* Renderiza TimeLeft dentro del modal */}
+          </div>
+        </div>
+      )}
+
+      {isTaskModalOpen && (
+        <AddEditTaskModal
+          setIsAddTaskModalOpen={setIsTaskModalOpen}
+          type="add"
+          device="mobile"
+        />
+      )}
+
+      <NotificationModal notification={notification} onClose={() => setNotification(null)} />
+      {isWeatherModalOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        maxWidth: "500px",
+        width: "80%",
+      }}
+    >
+      <button
+        onClick={() => setIsWeatherModalOpen(false)}
+        style={{
+          background: "red",
+          color: "white",
+          border: "none",
+          padding: "10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          float: "right",
+        }}
+      >
+        X
+      </button>
+      <DailyPlanner /> {/* Renderiza DailyPlanner dentro del modal */}
+    </div>
+  </div>
+)}
+
+{isCountdownManagerOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        maxWidth: "500px",
+        width: "80%",
+      }}
+    >
+      <button
+        onClick={() => setIsCountdownManagerOpen(false)}
+        style={{
+          background: "red",
+          color: "white",
+          border: "none",
+          padding: "10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          float: "right",
+        }}
+      >
+        X
+      </button>
+      <CountdownManager /> {/* Renderiza DailyPlanner dentro del modal */}
+    </div>
+  </div>
+)}
     </div>
   );
 };
