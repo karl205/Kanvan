@@ -522,7 +522,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
           padding: "10px",
           borderRadius: "5px",
           cursor: "pointer",
-          float: "right",
+          float: "right",s
         }}
       >
         X

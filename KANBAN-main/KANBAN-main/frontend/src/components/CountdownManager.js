@@ -115,7 +115,7 @@ const CountdownManager = () => {
               onClick={() => handleDeleteEvent(event.id)}
               style={{ padding: "5px 10px" }}
             >
-              Eliminar
+              Elimina
             </button>
           </li>
         ))}
