@@ -11,6 +11,7 @@ import TimeLeft from "./TimeLeft"; // Importar TimeLeft
 import DailyPlanner from "./DailyPlanner";
 import Pomodoro from "./Pomodoro"; 
 import axios from 'axios';
+import Clima from "./Clima";
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -24,7 +25,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [notification, setNotification] = useState(null);
   const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
   const [isPomodoroOpen, setIsPomodoroOpen] = useState(false);
-
+  const [isclimaOpen, setIsclimaOpen] = useState(false);
   
 
   const onDropdownClick = () => {
@@ -233,7 +234,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
         <Widget
           icon={<Sun size={18} />}
           value={weatherInfo} // Muestra la información del clima aquí
-          onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+          onClick={() => setIsclimaOpen(true)} // Abre el modal para UserWidget
         />
       </div>
     );
@@ -460,6 +461,53 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     </div>
   </div>
 )}
+{isclimaOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        maxWidth: "500px",
+        width: "80%",
+      }}
+    >
+      <button
+        onClick={() => setIsclimaOpen(false)}
+        style={{
+          background: "red",
+          color: "white",
+          border: "none",
+          padding: "10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          float: "right",
+        }}
+      >
+        X
+      </button>
+      <clima/> {/* Renderiza DailyPlanner dentro del modal */}
+    </div>
+  </div>
+)}
+
+
+
+
+
 
     </div>
   );
