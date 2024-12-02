@@ -499,7 +499,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
       >
         X
       </button>
-      <clima/> {/* Renderiza DailyPlanner dentro del modal */}
+      <Clima/> {/* Renderiza DailyPlanner dentro del modal */}
     </div>
   </div>
 )}
