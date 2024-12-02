@@ -6,7 +6,7 @@ import AddEditBoardModal from "../modals/AddEditBoardModal";
 import DeleteModal from "../modals/DeleteModal";
 import AlarmModal from "./Alarma/AlarmModal"; // Incluido desde archivo compartido
 import NotificationModal from "./Alarma/NotificationModal"; // Incluido desde archivo compartido
-import { Clock, Sun, User, AlarmCheck } from "lucide-react";
+import { Clock, Sun, User, AlarmCheck, Hourglass, Edit, } from "lucide-react";
 import TimeLeft from "./TimeLeft"; // Importar TimeLeft
 import DailyPlanner from "./DailyPlanner";
 import Pomodoro from "./Pomodoro"; 
@@ -139,10 +139,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     );
   };
 
-  // Weather Widget
-  const WeatherWidget = () => (
-    <Widget icon={<Sun size={18} />} value="23°C" />
-  );
+ 
 
   // User Widget
   const UserWidget = () => (
@@ -161,7 +158,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   );
   const Otro = () => (
     <Widget
-      icon={<User size={18} />}
+      icon={<Hourglass size={18} />}
       value="Regresiva"
       onClick={() => setIsCountdownManagerOpen(true)} // Abre el modal para UserWidget
     />
@@ -244,7 +241,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   };
   const Otro2 = () => (
     <Widget
-      icon={<User size={18} />}
+      icon={<Edit size={18} />}
       value="Pomodoro"
       onClick={() => setIsPomodoroOpen(true)} // Abre el Pomodoro para UserWidget
     />
@@ -284,7 +281,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
         className="dark:bg-[#20212c]"
       >
         <ClockWidget />
-        <WeatherWidget />
+        
         <UserWidget />
         <Planificacion />
         <Otro />
