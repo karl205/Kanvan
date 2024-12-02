@@ -41,7 +41,14 @@ const TimeLeft = () => {
     const weekDiff = endOfWeek - now;
 
     // Tiempo restante para el final del mes
-    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+    const endOfMonth = new Date(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      0,
+      23,
+      59,
+      59
+    );
     const monthDiff = endOfMonth - now;
 
     // Tiempo restante para el final del año
@@ -81,41 +88,55 @@ const TimeLeft = () => {
         textAlign: "center",
         fontFamily: "'Roboto', Arial, sans-serif",
         padding: "20px",
-        backgroundColor: "#121212",
-        color: "#f5f5f5",
+        backgroundColor: "#1e293b", // Fondo azul oscuro
+        color: "#e2e8f0", // Texto gris claro
         borderRadius: "15px",
-        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
-        maxWidth: "400px",
+        boxShadow: "0 6px 15px rgba(0, 0, 0, 0.3)", // Sombra
+        maxWidth: "500px",
         margin: "auto",
+        transition: "transform 0.2s ease-in-out",
       }}
     >
-      <h1 style={{ fontSize: "2rem", marginBottom: "20px", color: "#03dac5" }}>
+      <h1
+        style={{
+          fontSize: "2.5rem",
+          marginBottom: "20px",
+          color: "#38bdf8", // Color azul vibrante
+          textShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Sombra de texto
+        }}
+      >
         ⏳ Tiempo Restante
       </h1>
-      <div style={{ marginBottom: "15px" }}>
-        <h2 style={{ fontSize: "1.5rem", color: "#bb86fc" }}>Hoy</h2>
-        <p style={{ fontSize: "1.25rem" }}>
-          {timeLeft.day.hours}h : {timeLeft.day.minutes}m : {timeLeft.day.seconds}s
-        </p>
-      </div>
-      <div style={{ marginBottom: "15px" }}>
-        <h2 style={{ fontSize: "1.5rem", color: "#bb86fc" }}>Semana</h2>
-        <p style={{ fontSize: "1.25rem" }}>
-          {timeLeft.week.days}d : {timeLeft.week.hours}h : {timeLeft.week.minutes}m : {timeLeft.week.seconds}s
-        </p>
-      </div>
-      <div style={{ marginBottom: "15px" }}>
-        <h2 style={{ fontSize: "1.5rem", color: "#bb86fc" }}>Mes</h2>
-        <p style={{ fontSize: "1.25rem" }}>
-          {timeLeft.month.days}d : {timeLeft.month.hours}h : {timeLeft.month.minutes}m : {timeLeft.month.seconds}s
-        </p>
-      </div>
-      <div>
-        <h2 style={{ fontSize: "1.5rem", color: "#bb86fc" }}>Año</h2>
-        <p style={{ fontSize: "1.25rem" }}>
-          {timeLeft.year.days}d : {timeLeft.year.hours}h : {timeLeft.year.minutes}m : {timeLeft.year.seconds}s
-        </p>
-      </div>
+      {["day", "week", "month", "year"].map((key, index) => (
+        <div
+          key={index}
+          style={{
+            marginBottom: "15px",
+            padding: "10px",
+            borderRadius: "10px",
+            backgroundColor: "#334155", // Fondo más oscuro para las secciones
+            boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
+            transition: "transform 0.2s ease-in-out",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              color: "#7dd3fc", // Azul claro
+              textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            {key.charAt(0).toUpperCase() + key.slice(1)}
+          </h2>
+          <p style={{ fontSize: "1.25rem" }}>
+            {key === "day"
+              ? `${timeLeft.day.hours}h : ${timeLeft.day.minutes}m : ${timeLeft.day.seconds}s`
+              : `${timeLeft[key].days}d : ${timeLeft[key].hours}h : ${timeLeft[key].minutes}m : ${timeLeft[key].seconds}s`}
+          </p>
+        </div>
+      ))}
     </div>
   );
 };
