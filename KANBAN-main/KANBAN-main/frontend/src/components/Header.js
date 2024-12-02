@@ -12,6 +12,8 @@ import DailyPlanner from "./DailyPlanner";
 import Pomodoro from "./Pomodoro"; 
 import axios from 'axios';
 import Clima from "./Clima";
+import CountdownManager from "./CountdownManager";
+
 
 const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -26,6 +28,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
   const [isPomodoroOpen, setIsPomodoroOpen] = useState(false);
   const [isclimaOpen, setIsclimaOpen] = useState(false);
+  const [isCountdownManagerOpen, setIsCountdownManagerOpen] = useState(false);
   
 
   const onDropdownClick = () => {
@@ -159,8 +162,8 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const Otro = () => (
     <Widget
       icon={<User size={18} />}
-      value="Otromas"
-      onClick={() => setIsUserModalOpen(true)} // Abre el modal para UserWidget
+      value="Regresiva"
+      onClick={() => setIsCountdownManagerOpen(true)} // Abre el modal para UserWidget
     />
   );
   const Otro1 = () => {
@@ -505,6 +508,49 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
 )}
 
 
+
+{isCountdownManagerOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000,
+    }}
+  >
+    <div
+      style={{
+        background: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        maxWidth: "500px",
+        width: "80%",
+      }}
+    >
+      <button
+        onClick={() => setIsCountdownManagerOpen(false)}
+        style={{
+          background: "red",
+          color: "white",
+          border: "none",
+          padding: "10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          float: "right",
+        }}
+      >
+        X
+      </button>
+      <CountdownManager/> {/* Renderiza DailyPlanner dentro del modal */}
+    </div>
+  </div>
+)}
 
 
 
