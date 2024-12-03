@@ -17,6 +17,7 @@ import ReproductorComponent from './components/ReproductorComponent';
 import SideMenu from "./components/SideMenu";
 import TimeLeft from './components/TimeLeft';
 import DailyPlanner from './components/DailyPlanner';
+import HelpButton from "./components/ChatBot";
 
 
 
@@ -100,6 +101,7 @@ function App() {
         
               
         <SideMenu/>
+        <HelpButton></HelpButton>
         
        
         
