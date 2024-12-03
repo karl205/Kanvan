@@ -9,7 +9,7 @@ const ChatBot = () => {
     chatGPT: {
       url: "https://api.openai.com/v1/chat/completions",
       headers: {
-        Authorization: "Bearer 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",
+        Authorization: "Bearer",
         "Content-Type": "application/json",
       },
       body: {
