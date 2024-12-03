@@ -59,7 +59,7 @@ const Clima = () => {
 
   return (
     <div style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "8px", maxWidth: "400px", margin: "auto" }}>
-      <h3>Clima</h3>
+      <h2>Clima</h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -93,7 +93,7 @@ const Clima = () => {
           placeholder="Ej. Ciudad, País"
           style={{ margin: "10px 0", padding: "8px", width: "100%" }}
         />
-        <button type="submit" style={{ padding: "10px 20px" }}>Consultar Clima</button>
+        <button type="submit" style={{ padding: "10px 20px", background:"Green" }}>Consultar Clima</button>
       </form>
     </div>
   );

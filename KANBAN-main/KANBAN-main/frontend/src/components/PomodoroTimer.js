@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-const Pomodoro = () => {
+const PomodoroTimer = () => {
   const [workTime, setWorkTime] = useState(25); // minutos de trabajo
   const [breakTime, setBreakTime] = useState(5); // minutos de descanso
   const [timeRemaining, setTimeRemaining] = useState(workTime * 60); // tiempo restante en segundos
@@ -82,4 +82,4 @@ const Pomodoro = () => {
   );
 };
 
-export default Pomodoro;
+export default PomodoroTimer;
