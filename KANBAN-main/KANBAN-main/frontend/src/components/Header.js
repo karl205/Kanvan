@@ -441,28 +441,23 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
         borderRadius: "10px",
         maxWidth: "500px",
         width: "80%",
-        position: "relative", // Asegura que el botón de cierre se posicione correctamente
       }}
     >
       <button
-        onClick={() => setIsPomodoroOpen(false)} // Llama a setIsPomodoroOpen(false) para cerrar el modal
+        onClick={() => setIsPomodoroOpen(false)}
         style={{
-          position: "absolute",
-          top: "10px",
-          right: "10px",
           background: "red",
           color: "white",
           border: "none",
           padding: "10px",
           borderRadius: "5px",
           cursor: "pointer",
+          float: "right",
         }}
       >
         X
       </button>
-
-      {/* Renderiza el componente Pomodoro */}
-      <Pomodoro isOpen={isPomodoroOpen} onClose={() => setIsPomodoroOpen(false)} />
+      <Pomodoro /> {/* Renderiza DailyPlanner dentro del modal */}
     </div>
   </div>
 )}
@@ -524,6 +519,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
       justifyContent: "center",
       alignItems: "center",
       zIndex: 1000,
+      
     }}
   >
     <div
@@ -533,6 +529,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
         borderRadius: "10px",
         maxWidth: "500px",
         width: "80%",
+        
       }}
     >
       <button
@@ -545,6 +542,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
           borderRadius: "5px",
           cursor: "pointer",
           float: "right",
+          
         }}
       >
         X

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 const CountdownManager = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(() => {
+    const savedEvents = localStorage.getItem("events");
+    return savedEvents ? JSON.parse(savedEvents) : [];
+  });
+
   const [newEvent, setNewEvent] = useState({ name: "", date: "" });
 
   // Calcula el tiempo restante para un evento
@@ -22,14 +26,25 @@ const CountdownManager = () => {
     return `${days}d ${hours}h ${minutes}m ${seconds}s`;
   };
 
+  // Guardar eventos en localStorage cuando cambien
+  useEffect(() => {
+    localStorage.setItem("events", JSON.stringify(events));
+  }, [events]);
+
   // Actualiza automáticamente los contadores
   useEffect(() => {
     const interval = setInterval(() => {
       setEvents((prevEvents) =>
-        prevEvents.map((event) => ({
-          ...event,
-          timeLeft: calculateTimeLeft(event.date),
-        }))
+        prevEvents.map((event) => {
+          const updatedTimeLeft = calculateTimeLeft(event.date);
+
+          // Mostrar alerta cuando el evento finalice
+          if (updatedTimeLeft === "Evento finalizado" && event.timeLeft !== "Evento finalizado") {
+            alert(`El evento "${event.name}" ha finalizado.`);
+          }
+
+          return { ...event, timeLeft: updatedTimeLeft };
+        })
       );
     }, 1000);
 
@@ -87,8 +102,10 @@ const CountdownManager = () => {
             onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
             style={{ padding: "10px", marginRight: "10px" }}
           />
-          <button type="submit" style={{ padding: "10px 15px" , background:"Green"}}>Añadir</button>
-        </div> 
+          <button type="submit" style={{ padding: "10px 15px", background: "green", color: "white", border: "none" }}>
+            Añadir
+          </button>
+        </div>
       </form>
       <ul style={{ listStyleType: "none", padding: 0 }}>
         {events.map((event) => (
@@ -107,13 +124,28 @@ const CountdownManager = () => {
             <p>{event.timeLeft}</p>
             <button
               onClick={() => handleEditEvent(event.id)}
-              style={{ marginRight: "10px", padding: "5px 10px" }}
+              style={{
+                marginRight: "10px",
+                padding: "5px 10px",
+                background: "orange",
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
             >
               Editar
             </button>
             <button
               onClick={() => handleDeleteEvent(event.id)}
-              style={{ padding: "5px 10px" }}
+              style={{
+                padding: "5px 10px",
+                background: "red",
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
             >
               Eliminar
             </button>
@@ -125,3 +157,5 @@ const CountdownManager = () => {
 };
 
 export default CountdownManager;
+
+
