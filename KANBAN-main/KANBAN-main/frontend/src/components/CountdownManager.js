@@ -7,7 +7,52 @@ const CountdownManager = () => {
   });
 
   const [newEvent, setNewEvent] = useState({ name: "", date: "" });
+  const [nextEvent, setNextEvent] = useState(null);
 
+  const CountdownManager = () => {
+    const [events, setEvents] = useState(() => {
+      const savedEvents = localStorage.getItem("events");
+      return savedEvents ? JSON.parse(savedEvents) : [];
+    });
+  
+    const [nextEvent, setNextEvent] = useState(null);
+  
+    const calculateTimeLeft = (date) => {
+      const now = new Date();
+      const eventDate = new Date(date);
+      const difference = eventDate - now;
+  
+      if (difference <= 0) {
+        return "Evento finalizado";
+      }
+  
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((difference / (1000 * 60)) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
+  
+      return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        const upcomingEvents = events
+          .filter((event) => new Date(event.date) > new Date())
+          .sort((a, b) => new Date(a.date) - new Date(b.date));
+        const next = upcomingEvents[0];
+        if (next) {
+          setNextEvent({ ...next, timeLeft: calculateTimeLeft(next.date) });
+        } else {
+          setNextEvent(null);
+        }
+      }, 1000);
+  
+      return () => clearInterval(interval);
+    }, [events]);
+  
+    return { nextEvent }; // Retorna el próximo evento
+  };
+  
   // Calcula el tiempo restante para un evento
   const calculateTimeLeft = (date) => {
     const now = new Date();

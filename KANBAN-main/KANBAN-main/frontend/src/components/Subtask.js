@@ -26,7 +26,7 @@ function Subtask({ index, taskIndex, colIndex }) {
         onChange={onChange}
         
       />
-      <p>asd</p>
+      
       <p className={checked && " line-through opacity-30 "}>
       {subtask.title}
       </p>
