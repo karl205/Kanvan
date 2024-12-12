@@ -29,6 +29,8 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const [isPomodoroOpen, setIsPomodoroOpen] = useState(false);
   const [isclimaOpen, setIsclimaOpen] = useState(false);
   const [isCountdownManagerOpen, setIsCountdownManagerOpen] = useState(false);
+  const { nextEvent } = CountdownManager();
+
   
 
   const onDropdownClick = () => {
@@ -159,7 +161,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
   const Otro = () => (
     <Widget
       icon={<Hourglass size={18} />}
-      value="Regresiva"
+      value={nextEvent ? `${nextEvent.name}: ${nextEvent.timeLeft}` : "Sin eventos próximos"}
       onClick={() => setIsCountdownManagerOpen(true)} // Abre el modal para UserWidget
     />
   );
@@ -168,7 +170,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
     const [permissionDenied, setPermissionDenied] = useState(false);
   
     // Reemplaza con tu clave API de OpenWeather
-    const apiKey = '166f9650145b9de96741f8b02fdc6863';
+    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   
     useEffect(() => {
       // Si la ubicación no se ha proporcionado, intentamos obtenerla automáticamente
@@ -519,6 +521,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
       justifyContent: "center",
       alignItems: "center",
       zIndex: 1000,
+      
     }}
   >
     <div
@@ -528,6 +531,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
         borderRadius: "10px",
         maxWidth: "500px",
         width: "80%",
+        
       }}
     >
       <button
@@ -540,6 +544,7 @@ const Header = ({ setIsBoardModalOpen, isBoardModalOpen, user, handleLogout }) =
           borderRadius: "5px",
           cursor: "pointer",
           float: "right",
+          
         }}
       >
         X

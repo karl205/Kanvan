@@ -7,7 +7,7 @@ const Clima = () => {
   const [manualLocation, setManualLocation] = useState(""); // Entrada manual
   const [error, setError] = useState(null); // Manejo de errores
 
-  const API_KEY = "166f9650145b9de96741f8b02fdc6863"; // Reemplaza con tu clave de API
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY; // Reemplaza con tu clave de API
 
   // Obtener clima por coordenadas
   const fetchWeatherByCoords = async (lat, lon) => {
@@ -59,7 +59,7 @@ const Clima = () => {
 
   return (
     <div style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "8px", maxWidth: "400px", margin: "auto" }}>
-      <h3>Clima</h3>
+      <h2>Clima</h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -84,7 +84,7 @@ const Clima = () => {
       )}
 
       <form onSubmit={handleManualSubmit} style={{ marginTop: "20px" }}>
-        <label htmlFor="location">Ingresar ubicación manualmente:</label>
+        <label htmlFor="location">Ingresar ubicación manualmentehhhhh:</label>
         <input
           type="text"
           id="location"
@@ -93,7 +93,7 @@ const Clima = () => {
           placeholder="Ej. Ciudad, País"
           style={{ margin: "10px 0", padding: "8px", width: "100%" }}
         />
-        <button type="submit" style={{ padding: "10px 20px" }}>Consultar Clima</button>
+        <button type="submit" style={{ padding: "10px 20px", background:"Green" }}>Consultar Clima</button>
       </form>
     </div>
   );

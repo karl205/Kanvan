@@ -7,7 +7,7 @@ const WeatherWidget = () => {
   const [error, setError] = useState(null); // Errores
   const [manualInput, setManualInput] = useState(false); // Modo entrada manual
   const [manualLocation, setManualLocation] = useState(""); // Entrada manual de ubicación
-  const API_KEY = "166f9650145b9de96741f8b02fdc6863"; // Sustituye con tu API Key de OpenWeatherMap
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
   // Función para obtener datos de clima por coordenadas
   const fetchWeatherByCoords = async (lat, lon) => {
